@@ -1,4 +1,4 @@
-# RAP Application for Barcode Scanner
+# ZRAP_BARCODE_SCAN
 This folder (`ZRAP_BARCODE_SCAN`) contains all the necessary ABAP artifacts to create the **Barcode Scanner RAP Application** as per the blueprint.
 
 ## Steps to Deploy this to your SAP System:
