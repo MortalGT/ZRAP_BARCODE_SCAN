@@ -1,0 +1,58 @@
+managed implementation in class zbp_i_scan_header unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_ScanHeader alias Header
+persistent table zscan_hdr
+draft table zscan_hdr_d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+  association _Item { create; with draft; }
+
+  field ( numbering : managed, readonly ) HeaderId;
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, LocalLastChangedAt;
+
+  determination ProcessScannedBatch on modify { field ScannedBatch; }
+
+  side effects { field ScannedBatch affects entity _Item, field ScannedBatch; }
+
+  mapping for zscan_hdr {
+    HeaderId = header_id;
+    Description = description;
+    ScannedBatch = scanned_batch;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for ZI_ScanItem alias Item
+persistent table zscan_itm
+draft table zscan_itm_d
+lock dependent by _Header
+authorization dependent by _Header
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) HeaderId;
+  field ( numbering : managed, readonly ) ItemId;
+  field ( readonly ) LocalLastChangedAt;
+  association _Header { with draft; }
+
+  mapping for zscan_itm {
+    ItemId = item_id;
+    HeaderId = header_id;
+    BatchNumber = batch_number;
+    Quantity = quantity;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

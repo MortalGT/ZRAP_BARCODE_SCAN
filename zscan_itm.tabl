@@ -1,0 +1,15 @@
+@EndUserText.label : 'Item Table for Scanner App'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zscan_itm {
+  key client    : abap.clnt;
+  key item_id   : sysuuid_x16;
+  header_id     : sysuuid_x16;
+  batch_number  : abap.char(40);
+  quantity      : abap.int4;
+  
+  @Semantics.systemDateTime.localInstanceLastChangedAt: true
+  local_last_changed_at : tzntstmpl;
+}

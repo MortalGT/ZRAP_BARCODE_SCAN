@@ -1,0 +1,22 @@
+@EndUserText.label : 'Header Table for Scanner App'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zscan_hdr {
+  key client    : abap.clnt;
+  key header_id : sysuuid_x16;
+  description   : abap.char(255);
+  scanned_batch : abap.char(40);
+  
+  @Semantics.user.createdBy: true
+  created_by : abap.char(12);
+  @Semantics.systemDateTime.createdAt: true
+  created_at : tzntstmpl;
+  @Semantics.user.lastChangedBy: true
+  last_changed_by : abap.char(12);
+  @Semantics.systemDateTime.lastChangedAt: true
+  last_changed_at : tzntstmpl;
+  @Semantics.systemDateTime.localInstanceLastChangedAt: true
+  local_last_changed_at : tzntstmpl;
+}

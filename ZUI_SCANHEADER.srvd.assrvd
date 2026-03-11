@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Scanner App'
+define service ZUI_SCANHEADER {
+  expose ZC_ScanHeader as Header;
+  expose ZC_ScanItem   as Item;
+}
